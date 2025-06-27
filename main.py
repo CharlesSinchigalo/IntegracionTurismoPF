@@ -31,8 +31,8 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# ❌ ELIMINAR ESTA LÍNEA SI YA EXISTEN LAS TABLAS:
-# Base.metadata.create_all(bind=engine)
+# ✅ ESTA LÍNEA CREA LAS TABLAS
+Base.metadata.create_all(bind=engine)
 
 # Rutas base
 @app.get("/")
