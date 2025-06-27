@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from database import Base, engine
 
-# Importar modelos (necesario si luego quieres usarlo en routers)
 import models.usuario
 import models.pais
 import models.destino
@@ -11,7 +10,6 @@ import models.opinion
 import models.reserva
 import models.auditoria
 
-# Importar routers
 from routers import usuarios
 from routers import pais
 from routers import destinos
@@ -21,10 +19,8 @@ from routers import opinion
 from routers import reserva
 from routers import auditoria
 
-# Importar autenticación (Google OAuth)
 from auth import google_oauth as auth
 
-# Crear la app FastAPI
 app = FastAPI(
     title="API Turismo",
     description="Backend para gestión de turismo, actividades y reservas.",
@@ -34,12 +30,10 @@ app = FastAPI(
 # ✅ ESTA LÍNEA CREA LAS TABLAS
 Base.metadata.create_all(bind=engine)
 
-# Rutas base
 @app.get("/")
 def read_root():
     return {"msg": "API de Turismo funcionando"}
 
-# Registrar routers
 app.include_router(usuarios.router)
 app.include_router(auth.router)
 app.include_router(pais.router)
