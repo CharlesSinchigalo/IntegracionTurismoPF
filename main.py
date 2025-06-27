@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from database import Base, engine
 from routers import (
     actividad,
     auditoria,
@@ -10,9 +11,15 @@ from routers import (
     usuarios
 )
 
-app = FastAPI()
+# Crea las tablas en la DB (si no existen)
+Base.metadata.create_all(bind=engine)
 
-# Rutas simples para test
+app = FastAPI(
+    title="API Turismo",
+    description="Backend para gestión de turismo, actividades y reservas.",
+    version="1.0.0"
+)
+
 @app.get("/")
 def read_root():
     return {"message": "API running on Railway!"}
