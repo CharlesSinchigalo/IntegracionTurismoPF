@@ -1,3 +1,5 @@
+import os
+import uvicorn
 from fastapi import FastAPI
 from database import Base, engine
 from routers import (
@@ -33,3 +35,7 @@ app.include_router(pais.router)
 app.include_router(reserva.router)
 app.include_router(tipo_actividad.router)
 app.include_router(usuarios.router)
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
